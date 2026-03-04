@@ -42,11 +42,11 @@ The directory structure of this project is as follows:
 ## 3. Dataset 
 This project uses the Endovis2017、Endovis2018、CATARACTS dataset.
 
-Download:https://github.com/wenxi-yue/SurgicalSAM/blob/main/README.md
+## Download ##
 
-https://ieee-dataport.org/open-access/cataracts?check_logged_in=1
+Source: [点击这里下载数据集 (填写链接)](https://github.com/wenxi-yue/SurgicalSAM/blob/main/README.md
 
-Source: 点击这里下载数据集 (填写链接)
+https://ieee-dataport.org/open-access/cataracts?check_logged_in=1)
 
 Format:sam_feature、image
 
