@@ -41,14 +41,22 @@ The directory structure of this project is as follows:
 
 ## 3. Dataset 
 This project uses the Endovis2017、Endovis2018、CATARACTS dataset.
-Download:https://github.com/wenxi-yue/SurgicalSAM/blob/main/README.md、
+
+Download:https://github.com/wenxi-yue/SurgicalSAM/blob/main/README.md
+
+https://ieee-dataport.org/open-access/cataracts?check_logged_in=1
+
 Source: 点击这里下载数据集 (填写链接)
+
 Format:sam_feature、image
 
 Data Splitting 
 We follow the splitting principle mentioned in the paper:
+
 Training Set: [80% (6 seq)]
+
 Validation Set: [20% (2 seq)]
+
 Note:The CATARACTS datasets were divided according to the patients, with the Endovis2017 and Endovis2018 datasets strictly following the publicly disclosed division rules of the competition.
 
 ## 4. Training
@@ -56,6 +64,7 @@ Environment Setup
 First, install the required dependencies: pip install -r requirements.txt
 
 Implementation Details & Hyperparameters
+
 We implemented the model using **PyTorch**. The input images were resized to **1024×1024**. Following the setup in Surgical-SAM, we utilized the **frozen SAM ViT-H encoder** as the backbone to extract high-level features. Only the **prompt encoder** and **mask decoder** were fine-tuned during training.
 
 #### Key Hyperparameters
@@ -135,16 +144,14 @@ To demonstrate the superior performance of our method, we visualize the segmenta
 #### 1. Comparison on EndoVis2017
 The following figure illustrates the qualitative segmentation results. Each row represents a distinct challenging surgical scene. Compared to other state-of-the-art methods (ISINet, TernausNet, Surgical-SAM), **CSAM-HQ** (Ours) produces masks with sharper boundaries and fewer artifacts.
 
-<p align="Endovis2017">
-  <!-- 请确保文件名与你上传的一致 -->
+<p align="可视化">
   <img src="./assets/vis_endovis.png" width="95%" alt="EndoVis Visualization">
 </p>
 
 #### 2. Generalization on CATARACTS (Unseen Dataset)
 We further evaluate the robustness of our model on the **unseen** CATARACTS dataset to test cross-domain generalization.
 
-<p align="CATARACTS">
-  <!-- 请确保文件名与你上传的一致 -->
+<p align="白内障">
   <img src="./assets/vis_cataracts.png" width="95%" alt="CATARACTS Visualization">
 </p>
 
