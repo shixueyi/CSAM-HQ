@@ -76,7 +76,7 @@ Different settings were applied depending on the dataset used (EndoVis2017, Endo
 | Dataset | Learning Rate (LR) | Prototype Count ($n$) |
 | :--- | :---: | :---: |
 | **EndoVis 2017** | 0.001 | 2 |
-| **CATARACTS** | - | 2 |
+| **CATARACTS** | 0.001 | 2 |
 | **EndoVis 2018** | 0.0001 | 4 |
 
 > **Note:** As mentioned in the paper, we set the prototype count $n=2$ for EndoVis2017 and CATARACTS, and $n=4$ for EndoVis2018 due to the complexity differences.
@@ -85,8 +85,67 @@ Training Steps
 To train the model from scratch, run the following command: python train.py  --dataset endovis_2017\CATARACTS  --fold 0
 python train.py  --dataset endovis_2018
 
+Inference Steps
+To inference the model from scratch, run the following command: python inference.py  --dataset endovis_2017\CATARACTS  --fold 0
+python inference.py  --dataset endovis_2018
+
 Checkpoints
 The trained model weights will be saved in the ./checkpoints/ directory.
 
 ## 5. Results
+We compare our **CSAM-HQ** with state-of-the-art methods on three public datasets: EndoVis2017, EndoVis2018, and CATARACTS. The best results are highlighted in **bold**.
 
+### 🏆 EndoVis2017 & EndoVis2018
+Performance comparison on robotic surgical instrument segmentation.
+
+| Dataset | Models | Ch. IoU $\uparrow$ | IoU $\uparrow$ | McIoU $\uparrow$ | BF | PF | LND | VS | GR | SI | MCS | UP | Params $\downarrow$ |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **EndoVis**<br>**2017** | ISINet | 55.62 | 52.20 | 28.96 | 38.70 | 38.50 | 50.09 | 27.43 | 2.10 | - | 28.72 | 12.56 | 162.52M |
+| | TernausNet | 35.27 | 12.67 | 10.17 | 13.45 | 12.39 | 20.51 | 5.97 | 1.08 | - | 1.00 | 16.76 | 32.20M |
+| | MF-TAPNet | 37.25 | 13.49 | 10.77 | 16.39 | 14.11 | 19.01 | 8.11 | 0.31 | - | 4.09 | 13.40 | 37.73M |
+| | Surgical-SAM | 69.94 | 69.94 | **67.03** | 68.30 | **51.77** | 75.52 | 68.24 | 57.63 | - | **86.95** | **60.80** | **4.65M** |
+| | **CSAM-HQ (Ours)** | **71.186** | **71.186** | 66.554 | **72.011** | 39.603 | **76.140** | **69.162** | **63.645** | - | 67.784 | 49.213 | 4.99M |
+| | | | | | | | | | | | | | |
+| **EndoVis**<br>**2018** | ISINet | 73.03 | 70.94 | 40.21 | 73.83 | 48.61 | 30.98 | 37.68 | - | 0.00 | - | - | 162.52M |
+| | TernausNet | 46.22 | 39.87 | 14.19 | 44.20 | 4.67 | 0.00 | 0.00 | - | 0.00 | - | - | 32.20M |
+| | MF-TAPNet | 67.87 | 39.14 | 24.68 | 69.23 | 6.10 | 11.68 | 14.00 | - | 0.91 | - | - | 37.73M |
+| | Surgical-SAM | 71.233 | 71.233 | 62.473 | **79.139** | 51.353 | **89.271** | 84.427 | - | 31.693 | - | - | **4.65M** |
+| | **CSAM-HQ (Ours)** | **74.536** | **74.536** | **68.405** | 75.003 | **56.531** | 88.631 | **93.334** | - | **46.096** | - | - | 4.99M |
+
+> **Abbreviations:**
+> *   **BF**: Bipolar Forceps, **PF**: Prograsp Forceps, **LND**: Large Needle Driver, **VS**: Vessel Sealer
+> *   **GR**: Grasping Retractor (2017 only), **SI**: Suction Instrument (2018 only)
+> *   **MCS**: Monopolar Curved Scissors (2017 only), **UP**: Ultrasound Probe (2017 only)
+
+### 👁️ CATARACTS
+Generalization performance comparison on cataract surgery dataset.
+
+| Models | Ch. IoU $\uparrow$ | IoU $\uparrow$ | McIoU $\uparrow$ | Spatula | PT | LI | CF | IK | SK | KF | Params |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Surgical-SAM | 55.59 | 55.59 | 57.296 | 57.042 | 61.91 | 57.29 | 50.53 | 64.876 | **56.59** | 1.01 | **4.65M** |
+| **CSAM-HQ (Ours)** | **57.57** | **57.57** | **61.67** | **57.32** | **66.19** | **58.91** | **54.60** | **72.17** | 53.43 | **17.35** | 4.99M |
+
+> **Abbreviations:**
+> **PT**: Phacoemulsification Tip, **LI**: Lens Injector, **CF**: Capsulorhexis Forceps, **IK**: Incision Knife, **SK**: Slit Knife, **KF**: Katena Forceps.
+
+### 🎨 Visual Results (Qualitative Analysis)
+
+To demonstrate the superior performance of our method, we visualize the segmentation results on challenging surgical scenes.
+
+#### 1. Comparison on EndoVis2017
+The following figure illustrates the qualitative segmentation results. Each row represents a distinct challenging surgical scene. Compared to other state-of-the-art methods (ISINet, TernausNet, Surgical-SAM), **CSAM-HQ** (Ours) produces masks with sharper boundaries and fewer artifacts.
+
+<p align="Endovis2017">
+  <!-- 请确保文件名与你上传的一致 -->
+  <img src="./assets/vis_endovis.png" width="95%" alt="EndoVis Visualization">
+</p>
+
+#### 2. Generalization on CATARACTS (Unseen Dataset)
+We further evaluate the robustness of our model on the **unseen** CATARACTS dataset to test cross-domain generalization.
+
+<p align="CATARACTS">
+  <!-- 请确保文件名与你上传的一致 -->
+  <img src="./assets/vis_cataracts.png" width="95%" alt="CATARACTS Visualization">
+</p>
+
+> **Observation:** As shown above, compared to the Surgical-SAM baseline, **CSAM-HQ** demonstrates superior robustness in cross-domain scenarios. It accurately captures **thin instruments** and **fine tips** that are often missed or fragmented by the baseline model.
