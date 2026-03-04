@@ -22,21 +22,37 @@ The directory structure of this project is as follows:
 
 
 [CSAM-HQ]/
+
 ├── data/                  # 存放数据集的文件夹
+
 │   ├── Endovis2017/       # 原始数据
+
 │   └── Endovis2018/       # 原始数据
+
 │   └── CATARACTS/         # 原始数据
+
 ├── models/                # 模型定义
+
 │   ├── mask_decoder.py    # 网络结构代码
+
 │   └── model_forword.py   # 自定义层
+
 ├── utils/                 # 工具函数
-│   ├── dataset.py      # 数据加载器
-│   └── utils.py         # 评价指标
-├── configs/               # 配置文件 (yaml/json)
+
+│   ├── dataset.py         # 数据加载器
+
+│   └── utils.py           # 评价指标
+
+├── configs/               # 配置文件
+
 ├── train.py               # 训练主脚本
-├── inference.py                # 测试/推理脚本
+
+├── inference.py           # 测试/推理脚本
+
 ├── requirements.txt       # 依赖包列表
+
 ├── README.md              # 说明文档
+
 └── assets/                # 存放README用到的图片
 
 ## 3. Dataset 
@@ -44,7 +60,7 @@ This project uses the Endovis2017、Endovis2018、CATARACTS dataset.
 
 ## Download ##
 
-Source: [点击这里下载数据集 (填写链接)](https://github.com/wenxi-yue/SurgicalSAM/blob/main/README.md
+Source: (https://github.com/wenxi-yue/SurgicalSAM/blob/main/README.md
 
 https://ieee-dataport.org/open-access/cataracts?check_logged_in=1)
 
