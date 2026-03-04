@@ -1,7 +1,7 @@
 # CSAM-HQ: A Multi-stage Refinement Framework for Surgical Instrument Segmentation based on SAM and Probabilistic Graphical Models
 ## 1. Method Overview
 ### Flowchart
-![Method Architecture](./assert/总体框架.pdf)
+![Method Architecture](assert/总体框架.pdf)
 > **Description:**
 > The proposed architecture is a high-quality surgical instrument segmentation framework based on the Segment Anything Model (SAM). As shown in the figure, the pipeline consists of four key components:
 >
@@ -161,14 +161,14 @@ To demonstrate the superior performance of our method, we visualize the segmenta
 The following figure illustrates the qualitative segmentation results. Each row represents a distinct challenging surgical scene. Compared to other state-of-the-art methods (ISINet, TernausNet, Surgical-SAM), **CSAM-HQ** (Ours) produces masks with sharper boundaries and fewer artifacts.
 
 <p align="可视化">
-  <img src="./assets/vis_endovis.png" width="95%" alt="EndoVis Visualization">
+  <img src="assets/vis_endovis.png" width="95%" alt="EndoVis Visualization">
 </p>
 
 #### 2. Generalization on CATARACTS (Unseen Dataset)
 We further evaluate the robustness of our model on the **unseen** CATARACTS dataset to test cross-domain generalization.
 
 <p align="白内障">
-  <img src="./assets/vis_cataracts.png" width="95%" alt="CATARACTS Visualization">
+  <img src="assets/vis_cataracts.png" width="95%" alt="CATARACTS Visualization">
 </p>
 
 > **Observation:** As shown above, compared to the Surgical-SAM baseline, **CSAM-HQ** demonstrates superior robustness in cross-domain scenarios. It accurately captures **thin instruments** and **fine tips** that are often missed or fragmented by the baseline model.
