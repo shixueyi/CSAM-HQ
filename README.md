@@ -1,23 +1,21 @@
 # CSAM-HQ: A Multi-stage Refinement Framework for Surgical Instrument Segmentation based on SAM and Probabilistic Graphical Models
-## 1. Method Overview
-### Flowchart
-![Method Architecture](assert/总体框架.pdf)
+## 1. 🎯 Method Overview (方法总览)
+
+### 🚀 Flowchart
+![Method Architecture](assets/framework.png)
+
 > **Description:**
 > The proposed architecture is a high-quality surgical instrument segmentation framework based on the Segment Anything Model (SAM). As shown in the figure, the pipeline consists of four key components:
 >
-> 1.  **Image Encoder Path (Frozen ❄️):**
->     Utilizes a pre-trained Transformer-based encoder (e.g., ViT) to extract image embeddings from input surgical frames. The weights are frozen during training to leverage robust feature representations from foundation models.
->
-> 2.  **Prototype-Based Prompt Encoder (Trainable 🔥):**
->     Unlike standard geometric prompts (points/boxes), this module integrates a **Class Prototype Memory**. It retrieves specific instrument prototypes (e.g., Grasping forceps, Scissors, Vessel Sealer) from the embedding space to generate semantic-aware prompts. This path is fully trainable to adapt to the surgical domain.
->
-> 3.  **HQ-Mask Decoder with HQ-Token:**
->     The core decoder fuses image embeddings with sparse prompt embeddings. It introduces a specialized **HQ-Token** into the input sequence of the Two-Way Transformer. This token, combined with **HQ-MLP**, captures high-frequency details to correct mask errors, fusing with the Base Mask to produce a refined High-Quality Mask.
->
-> 4.  **CRF Refinement Module:**
->     A post-processing "Decoding and Optimization" stage that employs a Conditional Random Field (CRF). It calculates pairwise and unary terms to minimize an energy function, further refining the mask boundaries for precise segmentation output.
+> 1. **Image Encoder Path (Frozen ❄️):** Utilizes a pre-trained Transformer-based encoder (e.g., ViT) to extract image embeddings from input surgical frames. The weights are frozen during training to leverage robust feature representations from foundation models.
+> 2. **Prototype-Based Prompt Encoder (Trainable 🔥):** Unlike standard geometric prompts (points/boxes), this module integrates a **Class Prototype Memory**. It retrieves specific instrument prototypes (e.g., Grasping forceps, Scissors, Vessel Sealer) from the embedding space to generate semantic-aware prompts. This path is fully trainable to adapt to the surgical domain.
+> 3. **HQ-Mask Decoder with HQ-Token:** The core decoder fuses image embeddings with sparse prompt embeddings. It introduces a specialized **HQ-Token** into the input sequence of the Two-Way Transformer. This token, combined with **HQ-MLP**, captures high-frequency details to correct mask errors, fusing with the Base Mask to produce a refined High-Quality Mask.
+> 4. **CRF Refinement Module:** A post-processing "Decoding and Optimization" stage that employs a Conditional Random Field (CRF). It calculates pairwise and unary terms to minimize an energy function, further refining the mask boundaries for precise segmentation output.
 
-## 2. Project Structure
+---
+
+## 2. 📂 Project Structure (代码树)
+
 The organized directory tree of this project is presented below:
 
 ```text
@@ -54,6 +52,7 @@ CSAM-HQ/
 ├── LICENSE
 ├── requirements.txt         # Environment dependency manifest
 └── README.md                # This instruction document
+```
 
 ## 3. 📊 Dataset Information & Data Splitting (数据集介绍与拆分原则)
 
