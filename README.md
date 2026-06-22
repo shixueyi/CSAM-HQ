@@ -59,7 +59,7 @@ CSAM-HQ/
 We evaluate our method on three public benchmarks. Please download the raw frames/features from the following official portals:
 
 - **EndoVis2017:** [Grand Challenge Portal](https://github.com/wenxi-yue/SurgicalSAM/blob/main/README.md/https://ieee-dataport.org/open-access/cataracts?check_logged_in=1)
-- **EndoVis2018:** [Robotic Scene Segmentation Challenge](https://github.com/wenxi-yue/SurgicalSAM/blob/main/README.md/https://ieee-dataport.org/open-access/cataracts?check_logged_in=1))
+- **EndoVis2018:** [Robotic Scene Segmentation Challenge](https://github.com/wenxi-yue/SurgicalSAM/blob/main/README.md/https://ieee-dataport.org/open-access/cataracts?check_logged_in=1)
 - **CATARACTS:** [IEEE Dataport Portal](https://ieee-dataport.org/open-access/cataracts)
 
 ### ✂️ Train-Validation Splitting Protocols (Strictly Matching Paper)
@@ -173,11 +173,10 @@ def execute_csam_hq_inference_step(dataloader, models, learnable_prototypes, dev
 ```
 ### 🏃 Command Line Inference Execution (命令行运行指南)
 
-Before running, ensure you have navigated into the application repository `cd surgicalSAM`.
+Before running, ensure you have navigated into the application repository: `cd surgicalSAM`.
 
-#### 🚀 Option A: Standard GPU Acceleration (Default Runtime)
-
-To execute inference using standard CUDA operations on your datasets (weights will be fetched from `../ckp/`):
+#### 🚀 1. Full Proposed Method (CSAM-HQ with CRF Refinement)
+To execute the complete end-to-end inference pipeline including the DenseCRF probabilistic graphical post-processing module:
 
 ```bash
 # Run on EndoVis2018 validation sets
@@ -189,14 +188,16 @@ python inference-crf.py --dataset endovis_2017 --fold 0
 # Run on Cross-Domain CATARACTS dataset (Automated resolution adaptation to 768x1024)
 python inference-crf.py --dataset Cataracts --fold 0
 ```
-#### 🐌 Option B: CPU-Only Fallback Deployment
 
-If you are deploying our model under restricted environments without CUDA capability, we provide a dedicated CPU evaluation entry point:
+#### 🧪 2. Baseline Model Evaluation (Ablation Study without CRF)
+
+To run the model variants without the CRF post-processing module (e.g., to systematically reproduce the ablation study baselines or evaluate raw network prediction speeds):
 
 ```bash
-# Triggers map_location='cpu' and strips torch.cuda.synchronize hooks automatically
+# Run baseline evaluation without CRF post-processing
 python inference.py --dataset endovis_2018
 ```
+
 ### 📦 Outputs Verification
 
 The quantitative inference speed statistics (Model FPS, CRF latency per frame) will be displayed on the screen, and color-mapped predicted masks will be securely generated and partitioned under the `./predictions/` directory matching the designated dataset naming scopes.
