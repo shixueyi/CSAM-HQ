@@ -1,5 +1,5 @@
 # CSAM-HQ: A Multi-stage Refinement Framework for Surgical Instrument Segmentation based on SAM and Probabilistic Graphical Models
-## 1. 🎯 Method Overview (方法总览)
+## 1. 🎯 Method Overview
 
 ### 🚀 Flowchart
 ![Method Architecture](assets/framework.png)
@@ -14,7 +14,7 @@
 
 ---
 
-## 2. 📂 Project Structure (代码树)
+## 2. 📂 Project Structure 
 
 The organized directory tree of this project is presented below:
 
@@ -54,7 +54,7 @@ CSAM-HQ/
 └── README.md                # This instruction document
 ```
 
-## 3. 📊 Dataset Information & Data Splitting (数据集介绍与拆分原则)
+## 3. 📊 Dataset Information & Data Splitting 
 
 We evaluate our method on three public benchmarks. Please download the raw frames/features from the following official portals:
 
@@ -70,7 +70,7 @@ To ensure unbiased evaluation, the dataset splitting principles strictly follow 
 
 ---
 
-## 4. ⚙️ Training Process & Parameter Settings (训练过程与代码)
+## 4. ⚙️ Training Process & Parameter Settings 
 
 ### Environment Setup
 First, install the required dependencies:
@@ -115,11 +115,11 @@ python train.py  --dataset endovis_2017\CATARACTS  --fold 0
 python train.py  --dataset endovis_2018
 ```
 
-## 5. 🔮 Inference Engine & Core Code Snippet (推理代码与演示)
+## 5. 🔮 Inference Engine & Core Code Snippet 
 
 To satisfy the ease-of-use and reproducible benchmarks requirement, we provide both an end-to-end command-line execution interface and a programmatic breakdown of our core inference pipeline.
 
-### 💻 Core Pipeline Walkthrough (核心前向前传与 CRF 耦合逻辑)
+### 💻 Core Pipeline Walkthrough 
 Below is the simplified programmatic workflow implemented inside `surgicalSAM/inference-crf.py`. It showcases how our framework sequentially couples the neural network embeddings with the probabilistic graphical post-processing:
 
 ```python
@@ -171,7 +171,7 @@ def execute_csam_hq_inference_step(dataloader, models, learnable_prototypes, dev
             
         return final_pred
 ```
-### 🏃 Command Line Inference Execution (命令行运行指南)
+### 🏃 Command Line Inference Execution 
 
 Before running, ensure you have navigated into the application repository: `cd surgicalSAM`.
 
@@ -265,7 +265,7 @@ We further evaluate the cross-domain robustness of our model on the **unseen** C
 
 > 🔍 **Key Observations:** > As illustrated above, compared to the Surgical-SAM baseline, **CSAM-HQ** exhibits exceptional generalization capabilities under domain transfer. It accurately captures **slender instrument shafts** and **fine mechanical tips** (such as the *Katena Forceps*) that are otherwise entirely missed, truncated, or fragmented by the raw foundation model baseline due to domain feature attenuation.
 
-## 8. 📦 Sample Data for Quick Testing (推理示例数据)
+## 8. 📦 Sample Data for Quick Testing 
 
 To help users quickly verify the setup and ensure the pipeline is immediately runnable without downloading full multi-gigabyte benchmarks, we provide a minimal subset inside the `./sample_data/` directory:
 
@@ -276,7 +276,7 @@ You can execute a quick end-to-end inference pass over these sample frames direc
 
 ---
 
-## 9. 🤖 Model Zoo & Callable Pre-trained Weights (可调用的模型权重)
+## 9. 🤖 Model Zoo & Callable Pre-trained Weights 
 
 Trained weights and foundation models required to run training or inference can be configured as follows. Please download the checkpoints and locate them inside the `./ckp/` folder before running the scripts:
 
